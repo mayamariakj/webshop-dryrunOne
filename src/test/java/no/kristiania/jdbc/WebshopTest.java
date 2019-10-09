@@ -15,9 +15,9 @@ public class WebshopTest {
         JdbcDataSource dataSource = new JdbcDataSource();
         dataSource.setUrl("jdbc:h2:mem:test");
 
-        dataSource.getConnection().createStatement().executeUpdate("create table products(name varchar(180))");
+        dataSource.getConnection().createStatement().executeUpdate("create table products(name varchar(100))");
 
-        ProductDao dao = new ProductDao(new JdbcDataSource());
+        ProductDao dao = new ProductDao(dataSource);
         String productName = pickOne(new String[]{"Apples", "Bananas", "Coconuts", "Dates"});
         dao.insertProduct(productName);
         assertThat(dao.listAll()).contains(productName);
