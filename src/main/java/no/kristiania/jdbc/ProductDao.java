@@ -29,7 +29,6 @@ public class ProductDao {
             statement.setString(1, productName);
             statement.executeUpdate();
         }
-
     }
 
 
@@ -67,5 +66,4 @@ public class ProductDao {
 
         System.out.println(productDao.listAll());
     }
-
 }
