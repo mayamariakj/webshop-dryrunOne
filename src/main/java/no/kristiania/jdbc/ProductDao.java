@@ -18,12 +18,10 @@ public class ProductDao {
 
     private DataSource dataSource;
 
-    public ProductDao(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
+    public ProductDao(DataSource dataSource) { this.dataSource = dataSource; }
+
 
     public void insertProduct(String productName) throws SQLException {
-
         try (Connection conn = dataSource.getConnection()){
             PreparedStatement statement = conn.prepareStatement(
                     "insert into products (name) values (?)"
@@ -69,4 +67,5 @@ public class ProductDao {
 
         System.out.println(productDao.listAll());
     }
+
 }

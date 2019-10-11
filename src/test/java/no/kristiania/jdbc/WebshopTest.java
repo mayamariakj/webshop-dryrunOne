@@ -3,6 +3,7 @@ package no.kristiania.jdbc;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Random;
 
@@ -15,7 +16,10 @@ public class WebshopTest {
         JdbcDataSource dataSource = new JdbcDataSource();
         dataSource.setUrl("jdbc:h2:mem:test");
 
-        dataSource.getConnection().createStatement().executeUpdate("create table products(name varchar(100))");
+        Connection connection = dataSource.getConnection();
+        connection.createStatement().executeUpdate(
+                "create table products(name varchar(100))"
+        );
 
         ProductDao dao = new ProductDao(dataSource);
         String productName = pickOne(new String[]{"Apples", "Bananas", "Coconuts", "Dates"});
@@ -23,8 +27,6 @@ public class WebshopTest {
         assertThat(dao.listAll()).contains(productName);
     }
 
-    private String pickOne(String[] strings){
-        return strings[new Random().nextInt(strings.length)];
-    }
+    private String pickOne(String[] strings){ return strings[new Random().nextInt(strings.length)]; }
 
 }
