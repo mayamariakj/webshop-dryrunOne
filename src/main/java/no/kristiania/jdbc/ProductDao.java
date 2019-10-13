@@ -66,4 +66,4 @@ public class ProductDao {
 
         System.out.println(productDao.listAll());
     }
-}
+}  /*prøver en ny fil*/
